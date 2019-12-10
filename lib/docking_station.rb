@@ -1,5 +1,7 @@
+require_relative 'bike.rb'
+
 class DockingStation
   def release_bike
-    puts "bike released"
+    return Bike.new
   end
 end

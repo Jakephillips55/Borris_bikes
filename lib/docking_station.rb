@@ -14,7 +14,14 @@ attr_accessor :capacity
   def release_bike
     fail 'No bikes available' if empty?
     @bikes.pop
+    bikes.each do |b|
+      if b.working?
+        b.delete(bike)
+        return bike
+      end
   end
+  fail 'No bikes available'
+end
 
   def dock(bike)
     fail 'no space for more bikes' if full?

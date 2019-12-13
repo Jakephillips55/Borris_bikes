@@ -24,6 +24,12 @@ describe DockingStation do
       expect { subject.release_bike }.to raise_error 'No bikes available'
   end
 
+  it 'not to release broken bike' do
+    bike = Bike.new
+    subject.dock bike
+    bike.report_broken
+    expect { subject.release_bike}.to raise_error 'No bikes available'
+  end
   it 'raises an error when user tries to dock a bike when bikes are at capacity' do
     expect { (DockingStation::DEFAULT_CAPACITY + 1).times{ subject.dock(Bike.new)}}.to raise_error 'no space for more bikes'
   end
@@ -34,8 +40,8 @@ describe DockingStation do
 
   it 'accepts capacity argument' do
     expect(DockingStation.new(25).capacity).to eq 25
-  end 
-  
+
+
 end
 
-
+end
